@@ -111,17 +111,15 @@ elif len(return_date) == 2:
         num_keys_return = weekday(return_date[1]) - today.weekday() + 7
 
 #executable path to chromedriver
-#executable_path = {'executable_path':'C:/Users/saksh/Downloads/chromedriver/chromedriver.exe'}
+executable_path = {'executable_path':'chromedriver.exe'}
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
-chrome_options.executable_path = os.environ.get("CHROMEDRIVER_PATH")
 
 #create splinter browser 
-browser = Browser('chrome', options=chrome_options)
+browser = Browser('chrome', options=chrome_options, **executable_path)
 
 #create selenium browser from splinter browser 
 driver = browser.driver
