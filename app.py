@@ -13,7 +13,14 @@ import datetime
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 import os 
-
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.firefox import GeckoDriverManager
 
 
 #get today's date
@@ -110,23 +117,18 @@ elif len(return_date) == 2:
     elif return_date[0] == 'next':
         num_keys_return = weekday(return_date[1]) - today.weekday() + 7
 
-#executable path to chromedriver
-executable_path = {'executable_path':'chromedriver.exe'}
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-
-#create splinter browser 
-browser = Browser('chrome', options=chrome_options, **executable_path)
-
-#create selenium browser from splinter browser 
-driver = browser.driver
+firefoxOptions = Options()
+firefoxOptions.add_argument("--headless")
+service = Service(GeckoDriverManager().install())
+driver = webdriver.Firefox(
+    options=firefoxOptions,
+    service=service,
+)
 
 
 
-browser.visit('https://transportnsw.info/regional-bookings/')
+driver.get('https://transportnsw.info/regional-bookings/')
 
 
 elem = driver.find_element(By.ID,'returnLabel').click();
