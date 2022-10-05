@@ -120,9 +120,10 @@ elif len(return_date) == 2:
 
 firefoxOptions = Options()
 firefoxOptions.add_argument("--headless")
-service = Service(GeckoDriverManager().install())
+
 driver = webdriver.Firefox(
-    options=firefoxOptions
+    options=firefoxOptions,
+    executable_path = GeckoDriverManager().install()
 )
 
 
