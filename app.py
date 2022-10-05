@@ -68,6 +68,9 @@ def calendar_mth(mth):
     elif mth == "dec":
         return 12 
 
+travel_date = 'next fri'
+return_date = 'next sat'
+dest = 'mel'
 travel_date = travel_date.split()
 return_date = return_date.split()
 dest = dest_switch(dest)
