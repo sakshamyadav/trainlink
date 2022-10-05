@@ -123,7 +123,7 @@ firefoxOptions.add_argument("--headless")
 service = Service(GeckoDriverManager().install())
 driver = webdriver.Firefox(
     options=firefoxOptions,
-    service=service,
+    service=service
 )
 
 
